@@ -43,4 +43,22 @@ export const resolvers = {
       return db.reviews.filter((r) => r.author_id === parent.id);
     },
   },
+  // MUTATIONS RESOLVERS
+  Mutation: {
+    addGame(_, args) {
+      const lastId = db.games[db.games.length - 1].id;
+      let game = {
+        ...args.game,
+        id: Number(lastId) + 1,
+      };
+      db.games.push(game);
+
+      return game;
+    },
+    deleteGame(_, args) {
+      db.games = db.games.filter((g) => g.id !== args.id);
+
+      return db.games;
+    },
+  },
 };

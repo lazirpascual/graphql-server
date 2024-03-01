@@ -1,4 +1,5 @@
 export const typeDefs = `#graphql
+  # SCHEMA DEFINITION
   type Game {
     id: ID!
     title: String!
@@ -18,6 +19,7 @@ export const typeDefs = `#graphql
     verified: Boolean!
     reviews: [Review!]
   }
+  # QUERIES
   type Query {
     games: [Game]
     game(id: ID!): Game
@@ -25,5 +27,14 @@ export const typeDefs = `#graphql
     review(id: ID!): Review
     authors: [Author]
     author(id: ID!): Author
+  }
+  # MUTATIONS
+  type Mutation {
+  addGame(game: AddGameInput!): Game
+  deleteGame(id: ID!): [Game]
+  }
+  input AddGameInput {
+    title: String!,
+    platform: [String!]!
   }
 `;
